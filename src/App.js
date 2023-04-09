@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
 
 function App() {
+  const [editingTodo, setEditingTodo] = useState(null);
+
+  const handleEditTodo = todo => {
+    setEditingTodo(todo);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingTodo(null);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <h1>Todo App</h1>
+      <TodoForm editingTodo={editingTodo} onCancelEdit={handleCancelEdit} />
+      <TodoList onEditTodo={handleEditTodo} />
     </div>
   );
 }
